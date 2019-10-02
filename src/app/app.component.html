@@ -1,0 +1,73 @@
+<!DOCTYPE>
+<h3 class="bg-primary p-4 text-white">Lista de tarefas de {{ getName() }}</h3>
+<div class = "my-1">
+   <h5> Tarefa: </h5>
+   <input class = "form-control" #todoText type ="text" placeholder="Tarefa"/>
+   <h5> Prioridade: </h5>
+   <select class = "form-control" name="prioridade" #todoPrioridade>
+       <option value="Alta">Alta</option>
+       <option value="Média">Intermediatia</option>
+       <option value="Baixa">Baixa</option>
+     </select>
+   <h5 > Data: </h5>
+   <input class = "form-control" type="date" #todoDataLimite>
+   <button class = "btn btn-primary m-2" (click) = "addItem(todoText.value, todoPrioridade.value, todoDataLimite.value)">
+     AddT
+   </button>
+</div>
+<h5 class="bg-primary p-1 text-white">Tarefa(s)</h5>
+<table class = "table table-striped table-bordered">
+   <thead>
+       <tr>
+         <th>
+           </th>
+           <th>Tarefa(s)</th>
+           <th>Realizada</th>
+           <th>Prioridade</th>
+           <th>Data</th>
+           <th>Status</th>
+           </tr>
+   </thead>
+   <tbody>
+       <tr *ngFor="let item of getTodoItems(); let i = index">
+           <td>{{ i + 1}}</td>
+           <td>{{ item.action }}</td>
+           <td>
+             <input type = "checkbox" [(ngModel)] = "item.done"/></td>
+           <td>{{ item.priority }}</td>
+           <td>{{ item.data }}</td>
+           <td [ngSwitch] = "item.done">
+               <span *ngSwitchCase = "true">Yes</span>
+               <span *ngSwitchDefault>No</span>
+           </td>
+       </tr>
+   </tbody>
+</table>
+<h5 class="bg-primary p-1 text-white">Tarefas Concluidas</h5>
+<table class = "table table-striped table-bordered">
+       <thead>
+       <tr>
+         <th>
+           </th>
+           <th>Tarefa(s)Reali.</th>
+           <th>Realizada</th>
+           <th>Prioridade</th>
+           <th>Data</th>
+           <th>Status</th>
+           </tr>
+       </thead>
+   <tbody>
+          <tr *ngFor="let item of getTodoItemsFeitos(); let i = index">
+               <td>{{ i + 1}}</td>
+               <td>{{ item.action }}</td>
+               <td>
+                 <input type = "checkbox" [(ngModel)] = "item.done"/></td>
+               <td>{{ item.priority }}</td>
+               <td>{{ item.data }}</td>
+               <td [ngSwitch] = "item.done">
+                   <span *ngSwitchCase = "true">Yes</span>
+                   <span *ngSwitchDefault>No</span>
+               </td> 
+           </tr>
+   </tbody>
+</table>
